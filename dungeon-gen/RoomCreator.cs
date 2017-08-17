@@ -18,8 +18,8 @@ namespace dungeon_gen
 
 		protected static BoundaryBox CreateRoom(BoundaryBox bbox)
 		{
-			var newSize = bbox.Size * (Random.Next(65, 90) / 100.0);
-			var newPos = (bbox.Size - newSize) * (Random.Next(20, 80) / 100.0);
+			var newSize = bbox.Size * (Random.Next(50, 90) / 100.0);
+			var newPos = (bbox.Size - newSize) * (Random.Next(30, 80) / 100.0);
 			return new BoundaryBox(newPos + bbox.Position, newSize);
 		}
 

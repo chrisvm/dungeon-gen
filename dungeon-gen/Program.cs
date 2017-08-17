@@ -9,7 +9,7 @@ namespace dungeon_gen
 		public static void Main(string[] args)
 		{
 			var mapGenerator = new BinarySpacePartition {
-				MinimumSideSize = 200,
+				MinimumSideSize = 100,
 				PrintDebug = false
 			};
 			

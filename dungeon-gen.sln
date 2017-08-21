@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.0.0
-MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dungeon_gen", "dungeon-gen\dungeon-gen.csproj", "{87DEDE7E-6303-44F6-A4E8-2CA2A803EE2A}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dungeon-gen-cli", "dungeon-gen\dungeon-gen-cli.csproj", "{87DEDE7E-6303-44F6-A4E8-2CA2A803EE2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dungeon-gen-lib", "dungeon-gen-lib\dungeon-gen-lib.csproj", "{C1D82D56-F435-45CB-A19D-06DE541E3CF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dungeon-gen-gui", "dungeon-gen-gui\dungeon-gen-gui.csproj", "{E2A934FC-083F-4B1E-981A-BE0CE909DC74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{87DEDE7E-6303-44F6-A4E8-2CA2A803EE2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87DEDE7E-6303-44F6-A4E8-2CA2A803EE2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87DEDE7E-6303-44F6-A4E8-2CA2A803EE2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D82D56-F435-45CB-A19D-06DE541E3CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D82D56-F435-45CB-A19D-06DE541E3CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D82D56-F435-45CB-A19D-06DE541E3CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D82D56-F435-45CB-A19D-06DE541E3CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A934FC-083F-4B1E-981A-BE0CE909DC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A934FC-083F-4B1E-981A-BE0CE909DC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A934FC-083F-4B1E-981A-BE0CE909DC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A934FC-083F-4B1E-981A-BE0CE909DC74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

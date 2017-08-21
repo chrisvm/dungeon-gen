@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace dungeon_gen.Bsp
+namespace dungeon_gen_lib.Bsp
 {
 	public class Vector2
 	{

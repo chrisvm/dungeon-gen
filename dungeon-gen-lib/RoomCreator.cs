@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using dungeon_gen.Bsp;
+using dungeon_gen_lib.Bsp;
 
-namespace dungeon_gen
+namespace dungeon_gen_lib
 {
 	public class RoomCreator
 	{

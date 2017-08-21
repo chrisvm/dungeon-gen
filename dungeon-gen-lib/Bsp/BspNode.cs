@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace dungeon_gen.Bsp
+namespace dungeon_gen_lib.Bsp
 {
 	public class BspNode
 	{

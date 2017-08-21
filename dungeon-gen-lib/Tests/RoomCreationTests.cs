@@ -1,7 +1,7 @@
-﻿using dungeon_gen.Bsp;
+﻿using dungeon_gen_lib.Bsp;
 using NUnit.Framework;
 
-namespace dungeon_gen.Tests
+namespace dungeon_gen_lib.Tests
 {
     public class RoomCreationTests
     {

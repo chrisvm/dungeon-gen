@@ -1,4 +1,4 @@
-﻿namespace dungeon_gen.Bsp
+﻿namespace dungeon_gen_lib.Bsp
 {
 	public class BoundaryBox
 	{

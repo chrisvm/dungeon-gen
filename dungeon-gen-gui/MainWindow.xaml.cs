@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using dungeon_gen_lib.Room;
 using dungeon_gen_lib.Bsp;
 using dungeon_gen_lib.Rendering;
 
@@ -26,11 +27,15 @@ namespace dungeon_gen_gui
 
 		private void GenerateButton_OnClick(object sender, RoutedEventArgs e)
 		{
+			if (WidthTextBox.Text == "" && HeighTextBox.Text == "") return;
+			
 			var mapWidth = int.Parse(WidthTextBox.Text);
 			var mapHeight = int.Parse(HeighTextBox.Text);
 			if (mapWidth == 0 || mapHeight == 0) return;
-			
-			var tree = Bsp.Partition(new BoundaryBox(new Vector2(0, 0), new Vector2(mapWidth, mapHeight)));
+			var tree = Bsp.Partition(new BoundaryBox(
+				                         new Vector2(0, 0), 
+				                         new Vector2(mapWidth, mapHeight)));
+			RoomCreator.CreateRooms(tree);
 			var bitmap = BitmapRenderer.Instance.Render(tree);
 			MapImage.Width = bitmap.Width;
 			MapImage.Height = bitmap.Height;

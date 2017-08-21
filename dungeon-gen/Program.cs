@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Drawing;
-using dungeon_gen_lib;
+using dungeon_gen_lib.Room;
 using dungeon_gen_lib.Bsp;
 using dungeon_gen_lib.Rendering;
 

@@ -50,7 +50,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\BitmapRenderer.cs" />
     <Compile Include="Rendering\IRenderer.cs" />
-    <Compile Include="RoomCreator.cs" />
+    <Compile Include="Room\RoomConnector.cs" />
+    <Compile Include="Room\RoomCreator.cs" />
     <Compile Include="Tests\RoomCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>

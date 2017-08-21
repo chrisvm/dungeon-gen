@@ -1,4 +1,5 @@
 ﻿using dungeon_gen_lib.Bsp;
+using dungeon_gen_lib.Room;
 using NUnit.Framework;
 
 namespace dungeon_gen_lib.Tests

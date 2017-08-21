@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using dungeon_gen_lib.Bsp;
 
-namespace dungeon_gen_lib
+namespace dungeon_gen_lib.Room
 {
 	public class RoomCreator
 	{

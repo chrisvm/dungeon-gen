@@ -1,7 +1,6 @@
 ﻿using System;
-using dungeon_gen.Bsp;
 
-namespace dungeon_gen
+namespace dungeon_gen.Bsp
 {
 	/// <summary>
 	/// Describes a spliting axis.

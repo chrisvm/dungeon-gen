@@ -8,7 +8,8 @@ namespace dungeon_gen_lib.Bsp
 		public IList<BspNode> Children { get; set; }
 		public BoundaryBox BBox { get; set; }
 		public BoundaryBox Room { get; set; }
-		
+		public SplitDirection SplitDirection { get; set; }
+
 		public BspNode(BoundaryBox bbox)
 		{
 			Children = new List<BspNode>();

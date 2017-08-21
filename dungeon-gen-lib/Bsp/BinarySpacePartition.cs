@@ -68,6 +68,7 @@ namespace dungeon_gen_lib.Bsp
 				else {
 					splitDirection = SplitDirection.Vertical;
 				}
+				node.SplitDirection = splitDirection;
 
 				// split box base on direction
 				BspNode node1, node2;

@@ -12,9 +12,19 @@ namespace dungeon_gen_lib.Room
 	
 	public class RoomConnector
 	{
-		public RoomConnection ConnectRooms(BspNode a, BspNode b)
+		public RoomConnection ConnectRooms(BspNode node)
 		{
-			throw new NotImplementedException();
+			var a = node.Children[0];
+			var b = node.Children[1];
+			if (node.SplitDirection == SplitDirection.Vertical) {
+				var axisMin = Math.Min(a.Room.Position.Y, b.Room.Position.Y);
+				var axisMax = Math.Min(a.Room.Position.Y + a.Room.Size.Y, 
+				                       b.Room.Position.Y + b.Room.Size.Y);
+			} else {
+				var axisMin = Math.Min(a.Room.Position.X, b.Room.Position.X);
+				var axisMax = Math.Min(a.Room.Position.X + a.Room.Size.X, 
+				                       b.Room.Position.X + b.Room.Size.X);
+			}
 		}
 	}
 }

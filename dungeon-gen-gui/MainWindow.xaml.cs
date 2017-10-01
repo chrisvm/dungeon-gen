@@ -23,7 +23,15 @@ namespace dungeon_gen_gui
 		public MainWindow()
 		{
 			InitializeComponent();
+			InitializeDefaultValues();
 		}
+
+		private void InitializeDefaultValues()
+		{
+			WidthTextBox.Text = "400";
+			HeighTextBox.Text = "400";
+		}
+
 
 		private void GenerateButton_OnClick(object sender, RoutedEventArgs e)
 		{

@@ -6,24 +6,16 @@ namespace dungeon_gen_lib.Room
 {
 	public class RoomCreator
 	{
-		private static readonly Random Random = new Random();
-		
-		public static void CreateRooms(BspNode bspTree)
-		{
-			var leafNodes = GetLeafNodes(bspTree);
-			foreach (var leaf in leafNodes) {
-				leaf.Room = CreateRoom(leaf.BBox);
-			}
-		}
+		protected Random _random;
 
-		protected static BoundaryBox CreateRoom(BoundaryBox bbox)
+		protected static BoundaryBox _CreateRoom(BoundaryBox bbox, Random random)
 		{
-			var newSize = bbox.Size * (Random.Next(50, 90) / 100.0);
-			var newPos = (bbox.Size - newSize) * (Random.Next(30, 80) / 100.0);
+			var newSize = bbox.Size * (random.Next(50, 90) / 100.0);
+			var newPos = (bbox.Size - newSize) * (random.Next(30, 80) / 100.0);
 			return new BoundaryBox(newPos + bbox.Position, newSize);
 		}
 
-		private static IEnumerable<BspNode> GetLeafNodes(BspNode bspTree)
+		protected static IEnumerable<BspNode> _GetLeafNodes(BspNode bspTree)
 		{
 			var list = new List<BspNode>();
 			var queue = new Queue<BspNode>();
@@ -41,6 +33,24 @@ namespace dungeon_gen_lib.Room
 			}
 			
 			return list;
+		}
+		
+		public RoomCreator(Random random)
+		{
+			_random = random;
+		}
+		
+		private IEnumerable<BspNode> GetLeafNodes(BspNode bspTree)
+		{
+			return _GetLeafNodes(bspTree);
+		}
+		
+		public void CreateRooms(BspNode bspTree)
+		{
+			var leafNodes = _GetLeafNodes(bspTree);
+			foreach (var leaf in leafNodes) {
+				leaf.Room = _CreateRoom(leaf.BBox, _random);
+			}
 		}
 	}
 }

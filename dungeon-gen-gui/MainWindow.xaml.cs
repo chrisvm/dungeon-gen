@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -19,10 +20,13 @@ namespace dungeon_gen_gui
 			MinimumSideSize = 100,
 			PrintDebug = false
 		});
+		private RoomCreator _roomCreator;
 		
 		public MainWindow()
 		{
 			InitializeComponent();
+			var random = new Random();
+			_roomCreator = new RoomCreator(random);
 			InitializeDefaultValues();
 		}
 
@@ -43,7 +47,7 @@ namespace dungeon_gen_gui
 			var tree = Bsp.Partition(new BoundaryBox(
 				                         new Vector2(0, 0), 
 				                         new Vector2(mapWidth, mapHeight)));
-			RoomCreator.CreateRooms(tree);
+			_roomCreator.CreateRooms(tree);
 			var bitmap = BitmapRenderer.Instance.Render(tree);
 			MapImage.Width = bitmap.Width;
 			MapImage.Height = bitmap.Height;

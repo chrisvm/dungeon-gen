@@ -20,7 +20,9 @@ namespace dungeon_gen
 			Console.WriteLine($"Tree.Children.Count = {nodeTree.Children.Count}");
 			
 			// create rooms
-			RoomCreator.CreateRooms(nodeTree);
+			var random = new Random();
+			var roomCreator = new RoomCreator(random);
+			roomCreator.CreateRooms(nodeTree);
 			
 			// render partition
 			PrintToBitmap(nodeTree);

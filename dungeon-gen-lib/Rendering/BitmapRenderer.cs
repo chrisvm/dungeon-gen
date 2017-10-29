@@ -26,7 +26,7 @@ namespace dungeon_gen_lib.Rendering
 			return bitmap;
 		}
 
-		private static void RenderHighlightedRooms(List<BspNode> nodes, Graphics gfx)
+		private static void RenderHighlightedRooms(IEnumerable<BspNode> nodes, Graphics gfx)
 		{
 			const int penWidth = 4;
 			var pen = new Pen(Color.Azure, penWidth) {

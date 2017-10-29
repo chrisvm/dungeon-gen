@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dungeon-gen-cli", "dungeon-gen\dungeon-gen-cli.csproj", "{87DEDE7E-6303-44F6-A4E8-2CA2A803EE2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dungeon-gen-cli", "dungeon-gen-cli\dungeon-gen-cli.csproj", "{87DEDE7E-6303-44F6-A4E8-2CA2A803EE2A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dungeon-gen-lib", "dungeon-gen-lib\dungeon-gen-lib.csproj", "{C1D82D56-F435-45CB-A19D-06DE541E3CF7}"
 EndProject

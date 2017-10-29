@@ -26,14 +26,14 @@ namespace dungeon_gen
 			roomCreator.CreateRooms(nodeTree);
 			
 			// collect only the nodes which children are all leafs
-			var allChildren = nodeTree.AllNodesBeneath(); 
-			var leafParents = allChildren.Where((node, i) => {
+			var leafParents = nodeTree.AllNodesBeneath().Where((node, i) => {
 				var childrenAreLeafs = node.Children.Count != 0;
 				foreach (var child in node.Children) {
 					if (child.Children.Count != 0) childrenAreLeafs = false;
 				}
 				return childrenAreLeafs;
 			});
+			
 			var bspNodes = leafParents as BspNode[] ?? leafParents.ToArray();
 			Console.WriteLine($"leafParents.Count = {bspNodes.Length}");
 			
@@ -54,15 +54,16 @@ namespace dungeon_gen
 			Console.WriteLine($"Connection Count = {connections.Count}");
 
 			// render partition
-			PrintToBitmap(nodeTree);
+			PrintToBitmap(nodeTree, connections);
 		}
-		
+
 		/// <summary>
 		/// Renders the given node tree to a png in the Desktop of the 
 		/// running user with the name "Example.png".
 		/// </summary>
 		/// <param name="nodeTree"></param>
-		private static void PrintToBitmap(BspNode nodeTree)
+		/// <param name="connections"></param>
+		private static void PrintToBitmap(BspNode nodeTree, List<RoomConnection> connections)
 		{
 			var bitmap = new BitmapRenderer().Render(nodeTree);
 			var path = System.IO.Path.Combine(

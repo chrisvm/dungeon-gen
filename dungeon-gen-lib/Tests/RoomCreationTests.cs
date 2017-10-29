@@ -19,12 +19,12 @@ namespace dungeon_gen_lib.Tests
             for (var iteration = 0; iteration < Iterations; iteration++) {
                 var room = roomCreator.CreateRoom(bbox);
             
-                Assert.Less(bbox.Position.X, room.Position.X);
-                Assert.Less(bbox.Position.Y, room.Position.Y);
-                Assert.Greater(bbox.Size.X, room.Size.X);
-                Assert.Greater(bbox.Size.Y, room.Size.Y);
-                Assert.Greater(bbox.Size.X, room.Position.X + room.Size.X);
-                Assert.Greater(bbox.Size.Y, room.Position.Y + room.Size.Y);
+                Assert.Less(bbox.position.x, room.position.x);
+                Assert.Less(bbox.position.y, room.position.y);
+                Assert.Greater(bbox.size.x, room.size.x);
+                Assert.Greater(bbox.size.y, room.size.y);
+                Assert.Greater(bbox.size.x, room.position.x + room.size.x);
+                Assert.Greater(bbox.size.y, room.position.y + room.size.y);
             }
         }
         
@@ -34,7 +34,7 @@ namespace dungeon_gen_lib.Tests
             
             public BoundaryBox CreateRoom(BoundaryBox bbox)
             {
-                return _CreateRoom(bbox, _random);
+                return _CreateRoom(bbox, Random);
             }
         }
     }

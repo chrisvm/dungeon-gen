@@ -6,15 +6,33 @@ namespace dungeon_gen_lib.Room
 {
 	public class RoomCreator
 	{
-		protected Random _random;
-
+		protected readonly Random Random;
+		
+		public RoomCreator(Random random)
+		{
+			Random = random;
+		}
+		
+		public void CreateRooms(BspNode bspTree)
+		{
+			var leafNodes = _GetLeafNodes(bspTree);
+			foreach (var leaf in leafNodes) {
+				leaf.room = _CreateRoom(leaf.bbox, Random);
+			}
+		}
+		
 		protected static BoundaryBox _CreateRoom(BoundaryBox bbox, Random random)
 		{
-			var newSize = bbox.Size * (random.Next(50, 90) / 100.0);
-			var newPos = (bbox.Size - newSize) * (random.Next(30, 80) / 100.0);
-			return new BoundaryBox(newPos + bbox.Position, newSize);
+			var newSize = bbox.size * (random.Next(50, 90) / 100.0);
+			var newPos = (bbox.size - newSize) * (random.Next(30, 80) / 100.0);
+			return new BoundaryBox(newPos + bbox.position, newSize);
 		}
-
+		
+		/// <summary>
+		/// Gets all the leaf nodes from a given BspNode tree.
+		/// </summary>
+		/// <param name="bspTree"></param>
+		/// <returns>An instance of IEnumerable with all the leaf nodes.</returns>
 		protected static IEnumerable<BspNode> _GetLeafNodes(BspNode bspTree)
 		{
 			var list = new List<BspNode>();
@@ -33,24 +51,6 @@ namespace dungeon_gen_lib.Room
 			}
 			
 			return list;
-		}
-		
-		public RoomCreator(Random random)
-		{
-			_random = random;
-		}
-		
-		private IEnumerable<BspNode> GetLeafNodes(BspNode bspTree)
-		{
-			return _GetLeafNodes(bspTree);
-		}
-		
-		public void CreateRooms(BspNode bspTree)
-		{
-			var leafNodes = _GetLeafNodes(bspTree);
-			foreach (var leaf in leafNodes) {
-				leaf.Room = _CreateRoom(leaf.BBox, _random);
-			}
 		}
 	}
 }

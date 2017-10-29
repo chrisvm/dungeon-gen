@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Drawing;
-using System.IO;
 using System.Windows;
-using System.Windows.Media.Imaging;
 using dungeon_gen_lib.Room;
 using dungeon_gen_lib.Bsp;
 using dungeon_gen_lib.Rendering;
@@ -14,19 +11,17 @@ namespace dungeon_gen_gui
 	/// </summary>
 	public partial class MainWindow
 	{
-		
-		private BinarySpacePartition _bsp;
-		private BinarySpacePartition Bsp => _bsp ?? (_bsp = new BinarySpacePartition {
+		private static readonly BitmapRenderer _bitmapRenderer = new BitmapRenderer();
+		private static readonly Random _random = new Random();
+		private static readonly RoomCreator _roomCreator = new RoomCreator(_random);
+		private static readonly BinarySpacePartition _bsp = new BinarySpacePartition {
 			MinimumSideSize = 100,
-			PrintDebug = false
-		});
-		private RoomCreator _roomCreator;
+			PrintDebug = false 
+		};
 		
 		public MainWindow()
 		{
 			InitializeComponent();
-			var random = new Random();
-			_roomCreator = new RoomCreator(random);
 			InitializeDefaultValues();
 		}
 
@@ -44,29 +39,14 @@ namespace dungeon_gen_gui
 			var mapWidth = int.Parse(WidthTextBox.Text);
 			var mapHeight = int.Parse(HeighTextBox.Text);
 			if (mapWidth == 0 || mapHeight == 0) return;
-			var tree = Bsp.Partition(new BoundaryBox(
+			var tree = _bsp.Partition(new BoundaryBox(
 				                         new Vector2(0, 0), 
 				                         new Vector2(mapWidth, mapHeight)));
 			_roomCreator.CreateRooms(tree);
-			var bitmap = BitmapRenderer.Instance.Render(tree);
+			var bitmap = _bitmapRenderer.Render(tree);
 			MapImage.Width = bitmap.Width;
 			MapImage.Height = bitmap.Height;
-			MapImage.Source = BitmapToImageSource(bitmap);
-		}
-		
-		private BitmapImage BitmapToImageSource(Image bitmap)
-		{
-			using (var memory = new MemoryStream())
-			{
-				bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-				memory.Position = 0;
-				var bitmapimage = new BitmapImage();
-				bitmapimage.BeginInit();
-				bitmapimage.StreamSource = memory;
-				bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-				bitmapimage.EndInit();
-				return bitmapimage;
-			}
+			MapImage.Source = BitmapRenderer.BitmapToImageSource(bitmap);
 		}
 	}
 }

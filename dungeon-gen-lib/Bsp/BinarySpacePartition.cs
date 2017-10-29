@@ -36,19 +36,19 @@ namespace dungeon_gen_lib.Bsp
 		{
 			while (true) {
 				bool xIsMinSize = false, yIsMinSize = false;
-				var bbox = node.BBox;
+				var bbox = node.bbox;
 
 				// check horizontal space supports partitioning
-				var supportsMinDivision = bbox.Size.X * MinPartitionRange > minimumSideSize;
-				var supportsMaxDivision = bbox.Size.X - bbox.Size.X * MaxPartitionRange > minimumSideSize;
-				if (bbox.Size.X <= minimumSideSize && !supportsMaxDivision && !supportsMinDivision) {
+				var supportsMinDivision = bbox.size.x * MinPartitionRange > minimumSideSize;
+				var supportsMaxDivision = bbox.size.x - bbox.size.x * MaxPartitionRange > minimumSideSize;
+				if (bbox.size.x <= minimumSideSize && !supportsMaxDivision && !supportsMinDivision) {
 					xIsMinSize = true;
 				}
 
 				// check vertical space supports partitioning
-				supportsMinDivision = bbox.Size.Y * MinPartitionRange > minimumSideSize;
-				supportsMaxDivision = bbox.Size.Y - bbox.Size.X * MaxPartitionRange > minimumSideSize;
-				if (bbox.Size.Y <= minimumSideSize && !supportsMaxDivision && !supportsMinDivision) {
+				supportsMinDivision = bbox.size.y * MinPartitionRange > minimumSideSize;
+				supportsMaxDivision = bbox.size.y - bbox.size.x * MaxPartitionRange > minimumSideSize;
+				if (bbox.size.y <= minimumSideSize && !supportsMaxDivision && !supportsMinDivision) {
 					yIsMinSize = true;
 				}
 
@@ -68,7 +68,7 @@ namespace dungeon_gen_lib.Bsp
 				else {
 					splitDirection = SplitDirection.Vertical;
 				}
-				node.SplitDirection = splitDirection;
+				node.splitDirection = splitDirection;
 
 				// split box base on direction
 				BspNode node1, node2;
@@ -78,10 +78,10 @@ namespace dungeon_gen_lib.Bsp
 					var maxRange = (int) (MaxPartitionRange * 100);
 					var split = randomInstance.Next(minRange, maxRange) / 100.0;
 
-					var size1 = new Vector2((int) (bbox.Size.X * split), bbox.Size.Y);
-					var pos1 = bbox.Position;
-					var size2 = new Vector2(bbox.Size.X - size1.X, bbox.Size.Y);
-					var pos2 = new Vector2(bbox.Position.X + size1.X, bbox.Position.Y);
+					var size1 = new Vector2((int) (bbox.size.x * split), bbox.size.y);
+					var pos1 = bbox.position;
+					var size2 = new Vector2(bbox.size.x - size1.x, bbox.size.y);
+					var pos2 = new Vector2(bbox.position.x + size1.x, bbox.position.y);
 
 					node1 = new BspNode(node, new BoundaryBox(pos1, size1));
 					node.AddChild(node1);
@@ -94,10 +94,10 @@ namespace dungeon_gen_lib.Bsp
 					var maxRange = (int) (MaxPartitionRange * 100);
 					var split = randomInstance.Next(minRange, maxRange) / 100.0;
 
-					var size1 = new Vector2(bbox.Size.X, (int) (bbox.Size.Y * split));
-					var size2 = new Vector2(bbox.Size.X, bbox.Size.Y - size1.Y);
-					var pos1 = bbox.Position;
-					var pos2 = new Vector2(bbox.Position.X, bbox.Position.Y + size1.Y);
+					var size1 = new Vector2(bbox.size.x, (int) (bbox.size.y * split));
+					var size2 = new Vector2(bbox.size.x, bbox.size.y - size1.y);
+					var pos1 = bbox.position;
+					var pos2 = new Vector2(bbox.position.x, bbox.position.y + size1.y);
 
 					node1 = new BspNode(node, new BoundaryBox(pos1, size1));
 					node.AddChild(node1);

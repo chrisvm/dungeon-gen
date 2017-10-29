@@ -12,46 +12,83 @@ namespace dungeon_gen_lib.Room
 	
 	public class RoomConnector
 	{
-		
 		public const int RoomRadius = 20;
-		private Random _random;
+		protected readonly Random Random;
 		
 		public RoomConnector(Random random)
 		{
-			_random = random;
+			Random = random;
 		}
 		
+		/// <summary>
+		/// Connects the children of the given node with a 
+		/// corridor.
+		/// </summary>
+		/// <param name="node"></param>
+		/// <returns>RoomConnection instance of the connecting corridor.</returns>
+		/// <exception cref="NotImplementedException"></exception>
 		public RoomConnection ConnectRooms(BspNode node)
 		{
 			var a = node.Children[0];
 			var b = node.Children[1];
 			
-			// calculate the range of values for posible starting endpoints 
-			// depending on the splitting axis of the boundary box
-			double axisMax, axisMin;
-			if (node.SplitDirection == SplitDirection.Vertical) {
-				axisMax = Math.Min(a.Room.Position.Y, b.Room.Position.Y);
-				axisMin = Math.Min(a.Room.Position.Y + a.Room.Size.Y, 
-				                       b.Room.Position.Y + b.Room.Size.Y);
+			// calculate the intersection of the two given bboxes
+			var intersection = new double[2];
+			if (node.splitDirection == SplitDirection.Vertical) {
+				intersection[0] = Math.Max(a.bbox.position.y, b.bbox.position.y);
+				intersection[1] = Math.Min(a.bbox.position.y + a.bbox.size.y, b.bbox.position.y + b.bbox.size.y);
 			} else {
-				axisMin = Math.Min(a.Room.Position.X, b.Room.Position.X);
-				axisMax = Math.Min(a.Room.Position.X + a.Room.Size.X, 
-				                       b.Room.Position.X + b.Room.Size.X);
+				intersection[0] = Math.Max(a.bbox.position.x, b.bbox.position.x);
+				intersection[1] = Math.Min(a.bbox.position.x + a.bbox.size.x, b.bbox.position.x + b.bbox.size.x);
+			}
+			
+			// no intersection between the bboxes,
+			// a z-corridor is needed
+			if (intersection[0] > intersection[1]) {
+				throw new NotImplementedException("Z Corridors are not implemented.");
+			}
+			
+			// if there's some intersection space but not enough to 
+			// create a axis corridor, create a z-corridor
+			if (intersection[1] - intersection[0] < 2 * RoomRadius) {
+				throw new NotImplementedException("Z Corridors are not implemented.");
 			}
 			
 			// create the real working range, taking into 
 			// account the constant radius of the room
-			var workingRangeMin = axisMin + RoomRadius;
-			var workingRangeMax = axisMax + RoomRadius;
-			var workingRangeDelta = workingRangeMax - workingRangeMin;
+			var workingRange = new [] {
+				intersection[0] + RoomRadius, 
+				intersection[1] - RoomRadius
+			};
 			
-			var corridorOrigin = workingRangeMin + _random.NextDouble() * workingRangeDelta; 
-			
-			// todo: correctly calculate the start and end of the connetion based on the calc origin
-			
-			return new RoomConnection {
+			var connection = new RoomConnection {
 				Width = RoomRadius
 			};
+			
+			// calculate start and end based on the split direction
+			var corridorOrigin = Between(workingRange[0], workingRange[1]);
+			
+			// calculate the start and end of the connetion based on the calc origin
+			if (node.splitDirection == SplitDirection.Vertical) {
+				connection.Start = new Vector2(a.bbox.position.x + a.bbox.size.x, corridorOrigin);
+				connection.End = new Vector2(b.bbox.position.x + b.bbox.size.x, corridorOrigin);
+			} else {
+				connection.Start = new Vector2(corridorOrigin, a.bbox.position.y + a.bbox.size.y);
+				connection.End = new Vector2(corridorOrigin, b.bbox.position.y + b.bbox.size.y);
+			}
+			
+			return connection;
+		}
+		
+		/// <summary>
+		/// Linear interpolation of a random point inside [a, b).
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		protected double Between(double a, double b)
+		{
+			return a + Random.NextDouble() * b;
 		}
 	}
 }

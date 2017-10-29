@@ -5,26 +5,26 @@ namespace dungeon_gen_lib.Bsp
 {
 	public class Vector2
 	{
-		public double X { get; set; }
-		public double Y { get; set; }
-		public Point AsPoint => new Point((int) X, (int) Y);
+		public double x { get; set; }
+		public double y { get; set; }
+		public Point AsPoint => new Point((int) x, (int) y);
 		
 		public Vector2() { }
 
 		public Vector2(double x, double y)
 		{
-			X = x;
-			Y = y;
+			this.x = x;
+			this.y = y;
 		}
 		
 		public static Vector2 operator+(Vector2 a, Vector2 b)
 		{
-			return new Vector2(a.X + b.X, a.Y + b.Y);
+			return new Vector2(a.x + b.x, a.y + b.y);
 		}
 
 		public static Vector2 operator-(Vector2 a, Vector2 b)
 		{
-			return new Vector2(a.X - b.X, a.Y - b.Y);
+			return new Vector2(a.x - b.x, a.y - b.y);
 		}
 
 		public static Vector2 operator *(Vector2 a, double b)
@@ -36,30 +36,30 @@ namespace dungeon_gen_lib.Bsp
 		
 		public Vector2 Clone()
 		{
-			return new Vector2(X, Y);
+			return new Vector2(x, y);
 		}
 
 		public void Scale(double scale)
 		{
-			X *= scale;
-			Y *= scale;
+			x *= scale;
+			y *= scale;
 		}
 		
 		public void Normalize()
 		{
 			var mag = Magnitude();
-			X /= mag;
-			Y /= mag;
+			x /= mag;
+			y /= mag;
 		}
 
 		public double Magnitude()
 		{
-			return Math.Sqrt(X * X + Y * Y);
+			return Math.Sqrt(x * x + y * y);
 		}
 		
 		public override string ToString()
 		{
-			return $"Vector2 {{ X={X}, Y={Y} }}";
+			return $"Vector2 {{ X={x}, Y={y} }}";
 		}
 	}
 }

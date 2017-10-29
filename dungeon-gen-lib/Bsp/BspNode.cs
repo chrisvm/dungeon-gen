@@ -6,15 +6,15 @@ namespace dungeon_gen_lib.Bsp
 	{
 		public BspNode Parent { get; set; }
 		public IList<BspNode> Children { get; set; }
-		public BoundaryBox BBox { get; set; }
-		public BoundaryBox Room { get; set; }
-		public SplitDirection SplitDirection { get; set; }
+		public BoundaryBox bbox { get; set; }
+		public BoundaryBox room { get; set; }
+		public SplitDirection splitDirection { get; set; }
 
 		public BspNode(BoundaryBox bbox)
 		{
 			Children = new List<BspNode>();
 			Parent = null;
-			BBox = bbox;
+			this.bbox = bbox;
 		}
 		
 		public BspNode(BspNode parent, BoundaryBox bbox)

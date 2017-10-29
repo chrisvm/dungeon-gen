@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -37,7 +36,7 @@ namespace dungeon_gen_lib.Rendering
 				DashPattern = new [] {1.0f , 1.0f}
 			};
 			foreach (var node in nodes) {
-				gfx.DrawPath(pen, GetGraphicsPath(node.bbox));	
+				gfx.DrawPath(pen, node.bbox.GetGraphicsPath());	
 			}
 		}
 
@@ -53,32 +52,12 @@ namespace dungeon_gen_lib.Rendering
 				                  (float) roomSize.y);
 			}
 			
-			var path = GetGraphicsPath(nodeTree.bbox);
+			var path = nodeTree.bbox.GetGraphicsPath();
 			gfx.DrawPath(Pens.Red, path);
 			
 			foreach (var child in nodeTree.Children) {
 				RecursiveRenderRooms(child, gfx);
 			}
-		}
-
-		private static Point[] GetPoints(BoundaryBox bbox)
-		{
-			var pointA = bbox.position.AsPoint;
-			var pointB = new Point((int) (bbox.position.x + bbox.size.x), (int) bbox.position.y);
-			var pointC = new Point((int) (bbox.position.x + bbox.size.x), (int) (bbox.position.y + bbox.size.y));
-			var pointD = new Point((int) bbox.position.x, (int) (bbox.position.y + bbox.size.y));
-			return new [] { pointA, pointB, pointC, pointD };
-		}
-		
-		private static GraphicsPath GetGraphicsPath(BoundaryBox bbox)
-		{
-			var points = GetPoints(bbox);
-			var gfxPath = new GraphicsPath();
-			gfxPath.AddLine(points[0], points[1]);
-			gfxPath.AddLine(points[1], points[2]);
-			gfxPath.AddLine(points[2], points[3]);
-			gfxPath.AddLine(points[3], points[0]);
-			return gfxPath;
 		}
 		
 		/// <summary>

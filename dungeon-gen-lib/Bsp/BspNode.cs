@@ -28,5 +28,19 @@ namespace dungeon_gen_lib.Bsp
 			child.Parent = this;
 			Children.Add(child);
 		}
+		
+		public List<BspNode> AllNodesBeneath()
+		{
+			return _recursiveAllNodesBeneath(new List<BspNode>());
+		}
+		
+		private List<BspNode> _recursiveAllNodesBeneath(List<BspNode> hashSet)
+		{
+			hashSet.Add(this);
+			foreach (var child in Children) {
+				child._recursiveAllNodesBeneath(hashSet);
+			}
+			return hashSet;
+		}
 	}
 }

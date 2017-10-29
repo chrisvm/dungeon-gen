@@ -14,6 +14,7 @@ namespace dungeon_gen_gui
 		private static readonly BitmapRenderer _bitmapRenderer = new BitmapRenderer();
 		private static readonly Random _random = new Random();
 		private static readonly RoomCreator _roomCreator = new RoomCreator(_random);
+		
 		private static readonly BinarySpacePartition _bsp = new BinarySpacePartition {
 			MinimumSideSize = 100,
 			PrintDebug = false 
@@ -22,13 +23,13 @@ namespace dungeon_gen_gui
 		public MainWindow()
 		{
 			InitializeComponent();
-			InitializeDefaultValues();
+			InitializeDefaultValues(this);
 		}
 
-		private void InitializeDefaultValues()
+		private static void InitializeDefaultValues(MainWindow mainWindow)
 		{
-			WidthTextBox.Text = "400";
-			HeighTextBox.Text = "400";
+			mainWindow.WidthTextBox.Text = "400";
+			mainWindow.HeighTextBox.Text = "400";
 		}
 
 

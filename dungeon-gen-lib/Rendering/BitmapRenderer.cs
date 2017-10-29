@@ -10,11 +10,11 @@ namespace dungeon_gen_lib.Rendering
 		public Bitmap Render(BspNode tree)
 		{
 			var bitmap = new Bitmap((int) tree.bbox.size.x, (int) tree.bbox.size.y);
-			RecursiveRenderToBitmap(tree, bitmap);
+			RecursiveRenderRoomsToBitmap(tree, bitmap);
 			return bitmap;
 		}
 		
-		private static void RecursiveRenderToBitmap(BspNode nodeTree, Image bitmap, Graphics gfx = null)
+		private static void RecursiveRenderRoomsToBitmap(BspNode nodeTree, Image bitmap, Graphics gfx = null)
 		{
 			if (gfx == null) {
 				gfx = Graphics.FromImage(bitmap);
@@ -38,7 +38,7 @@ namespace dungeon_gen_lib.Rendering
 			gfx.DrawLine(Pens.Red, points[3], points[0]);
 			
 			foreach (var child in nodeTree.Children) {
-				RecursiveRenderToBitmap(child, bitmap, gfx);
+				RecursiveRenderRoomsToBitmap(child, bitmap, gfx);
 			}
 		}
 
@@ -51,6 +51,11 @@ namespace dungeon_gen_lib.Rendering
 			return new [] { pointA, pointB, pointC, pointD };
 		}
 		
+		/// <summary>
+		/// Renders an Image instance to a BitmapImage.
+		/// </summary>
+		/// <param name="bitmap"></param>
+		/// <returns></returns>
 		public static BitmapImage BitmapToImageSource(Image bitmap)
 		{
 			using (var memory = new MemoryStream())

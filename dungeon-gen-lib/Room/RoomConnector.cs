@@ -12,12 +12,18 @@ namespace dungeon_gen_lib.Room
 	
 	public class RoomConnector
 	{
-		public const int RoomRadius = 20;
+		public int RoomRadius { get; set; } 
+		
 		protected readonly Random Random;
 		
+		/// <summary>
+		/// RoomConnector with RoomRadius defaulted to 20.
+		/// </summary>
+		/// <param name="random"></param>
 		public RoomConnector(Random random)
 		{
 			Random = random;
+			RoomRadius = 20;
 		}
 		
 		/// <summary>
@@ -66,7 +72,7 @@ namespace dungeon_gen_lib.Room
 			};
 			
 			// calculate start and end based on the split direction
-			var corridorOrigin = Between(workingRange[0], workingRange[1]);
+			var corridorOrigin = Utils.RandomBetween(workingRange[0], workingRange[1], Random);
 			
 			// calculate the start and end of the connetion based on the calc origin
 			if (node.splitDirection == SplitDirection.Vertical) {
@@ -78,17 +84,6 @@ namespace dungeon_gen_lib.Room
 			}
 			
 			return connection;
-		}
-		
-		/// <summary>
-		/// Linear interpolation of a random point inside [a, b).
-		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
-		/// <returns></returns>
-		protected double Between(double a, double b)
-		{
-			return a + Random.NextDouble() * b;
 		}
 	}
 }

@@ -55,6 +55,7 @@
     <Compile Include="Room\RoomConnector.cs" />
     <Compile Include="Room\RoomCreator.cs" />
     <Compile Include="Tests\RoomCreationTests.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

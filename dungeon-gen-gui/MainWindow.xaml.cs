@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows;
 using dungeon_gen_lib.Room;
 using dungeon_gen_lib.Bsp;
@@ -44,7 +45,10 @@ namespace dungeon_gen_gui
 				                         new Vector2(0, 0), 
 				                         new Vector2(mapWidth, mapHeight)));
 			_roomCreator.CreateRooms(tree);
-			var bitmap = _bitmapRenderer.Render(tree);
+			
+			var bitmap = new Bitmap((int) tree.bbox.size.x, (int) tree.bbox.size.y);
+			_bitmapRenderer.Render(tree, bitmap);
+			
 			MapImage.Width = bitmap.Width;
 			MapImage.Height = bitmap.Height;
 			MapImage.Source = BitmapRenderer.BitmapToImageSource(bitmap);

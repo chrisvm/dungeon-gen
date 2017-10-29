@@ -5,14 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using dungeon_gen_lib.Bsp;
+using dungeon_gen_lib.Room;
 
 namespace dungeon_gen_lib.Rendering
 {
 	public class BitmapRenderer : IRenderer
 	{
-		public Bitmap Render(BspNode tree)
+		public void Render(BspNode tree, Bitmap bitmap)
 		{
-			var bitmap = new Bitmap((int) tree.bbox.size.x, (int) tree.bbox.size.y);
 			var gfx = Graphics.FromImage(bitmap);
 			RecursiveRenderRooms(tree, gfx);
 			var leafParents = tree.AllNodesBeneath().Where((node, i) => {
@@ -23,7 +23,11 @@ namespace dungeon_gen_lib.Rendering
 				return childrenAreLeafs;
 			}).ToList();
 			RenderHighlightedRooms(leafParents, gfx);
-			return bitmap;
+		}
+
+		public void Render(IEnumerable<RoomConnection> rooms, Bitmap bitmap)
+		{
+			throw new System.NotImplementedException();
 		}
 
 		private static void RenderHighlightedRooms(IEnumerable<BspNode> nodes, Graphics gfx)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using dungeon_gen_lib.Room;
 using dungeon_gen_lib.Bsp;
@@ -65,7 +66,15 @@ namespace dungeon_gen
 		/// <param name="connections"></param>
 		private static void PrintToBitmap(BspNode nodeTree, List<RoomConnection> connections)
 		{
-			var bitmap = new BitmapRenderer().Render(nodeTree);
+			// create bitmap objecet to use in rendering
+			var bitmap = new Bitmap((int) nodeTree.bbox.size.x, (int) nodeTree.bbox.size.y); 
+			
+			// create renderer and render the boxes and connections
+			var renderer = new BitmapRenderer();
+			renderer.Render(nodeTree, bitmap);
+			renderer.Render(connections, bitmap);
+			
+			// write to file
 			var path = System.IO.Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
 				"Example.png");

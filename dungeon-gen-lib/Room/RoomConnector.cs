@@ -61,7 +61,8 @@ namespace dungeon_gen_lib.Room
 			};
 			
 			var connection = new RoomConnection {
-				Width = RoomRadius
+				Width = RoomRadius,
+				SplitDirection = node.splitDirection
 			};
 			
 			// calculate start and end based on the split direction

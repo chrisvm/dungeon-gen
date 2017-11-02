@@ -71,8 +71,13 @@ namespace dungeon_gen
 			
 			// create renderer and render the boxes and connections
 			var renderer = new BitmapRenderer();
-			renderer.Render(nodeTree, bitmap);
-			renderer.Render(connections, bitmap);
+			try {
+				renderer.Render(nodeTree, bitmap);
+				renderer.Render(connections, bitmap);	
+			} catch (Exception exception) {
+				Console.WriteLine($"Error while rendering: {exception.Message}");
+				return;
+			}
 			
 			// write to file
 			var path = System.IO.Path.Combine(

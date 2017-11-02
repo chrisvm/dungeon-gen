@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Drawing;
+using System.Windows;
+using Point = System.Drawing.Point;
 
 namespace dungeon_gen_lib.Bsp
 {
@@ -55,6 +56,14 @@ namespace dungeon_gen_lib.Bsp
 		public double Magnitude()
 		{
 			return Math.Sqrt(x * x + y * y);
+		}
+		
+		public Vector2 Rotate(double angle)
+		{
+			var ret = Clone();
+			ret.x = x * Math.Cos(angle) - y * Math.Sin(angle);
+			ret.y = x * Math.Sin(angle) + y * Math.Cos(angle);
+			return ret;
 		}
 		
 		public override string ToString()

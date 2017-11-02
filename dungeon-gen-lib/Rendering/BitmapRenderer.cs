@@ -26,7 +26,11 @@ namespace dungeon_gen_lib.Rendering
 
 		public void Render(IEnumerable<RoomConnection> rooms, Bitmap bitmap)
 		{
-			throw new System.NotImplementedException();
+			var gfx = Graphics.FromImage(bitmap);
+			foreach (var room in rooms) {
+				var roomPath = room.GetPath();
+				gfx.DrawPath(Pens.Aquamarine, roomPath);
+			}
 		}
 
 		private static void RenderHighlightedRooms(IEnumerable<BspNode> nodes, Graphics gfx)

@@ -10,6 +10,11 @@ namespace dungeon_gen_lib.Rendering
 {
 	public class BitmapRenderer : IRenderer
 	{
+		/// <summary>
+		/// Render a given tree of BspNode instances.
+		/// </summary>
+		/// <param name="tree"></param>
+		/// <param name="bitmap"></param>
 		public void Render(BspNode tree, Bitmap bitmap)
 		{
 			var gfx = Graphics.FromImage(bitmap);
@@ -23,12 +28,17 @@ namespace dungeon_gen_lib.Rendering
 			}).ToList();
 			RenderHighlightedRooms(leafParents, gfx);
 		}
-
+		
+		/// <summary>
+		/// Render a given list of RoomConnection instances.
+		/// </summary>
+		/// <param name="rooms"></param>
+		/// <param name="bitmap"></param>
 		public void Render(IEnumerable<RoomConnection> rooms, Bitmap bitmap)
 		{
 			var gfx = Graphics.FromImage(bitmap);
 			foreach (var room in rooms) {
-				var roomPath = room.GetPath();
+				var roomPath = room.GetGraphicsPath();
 				gfx.DrawPath(Pens.Aquamarine, roomPath);
 			}
 		}

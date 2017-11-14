@@ -39,5 +39,11 @@ namespace dungeon_gen_lib.Room
 			gfxPath.AddLine(points[3], points[0]);
 			return gfxPath;
 		}
+		
+		public override string ToString()
+		{
+			var ret = $"RoomConnection {{ Start={Start}, End={End}, Width={Width} }}";
+			return ret;			
+		}
 	}
 }

@@ -8,6 +8,12 @@ namespace dungeon_gen_lib.Bsp
 		public Vector2 position;
 		public Vector2 size;
 		
+		public BoundaryBox()
+		{
+			position = new Vector2();
+			size = new Vector2();
+		}
+		
 		public BoundaryBox(Vector2 pos, Vector2 size)
 		{
 			position = pos;

@@ -5,7 +5,7 @@ namespace dungeon_gen_lib.Room
 {
 	public class RoomConnector
 	{
-		public int RoomRadius { get; set; } 
+		public int RoomRadius { get; } 
 		
 		protected readonly Random Random;
 		
@@ -25,7 +25,6 @@ namespace dungeon_gen_lib.Room
 		/// </summary>
 		/// <param name="node"></param>
 		/// <returns>RoomConnection instance of the connecting corridor.</returns>
-		/// <exception cref="NotImplementedException"></exception>
 		public RoomConnection ConnectRooms(BspNode node)
 		{
 			var a = node.Children[0];

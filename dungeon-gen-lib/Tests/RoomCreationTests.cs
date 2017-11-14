@@ -16,26 +16,15 @@ namespace dungeon_gen_lib.Tests
             var random = new Random();
             var roomCreator = new RoomCreatorExpose(random);
             
-            for (var iteration = 0; iteration < Iterations; iteration++) {
+            TestingTools.IterateAction(Iterations, () => {
                 var room = roomCreator.CreateRoom(bbox);
-            
                 Assert.Less(bbox.position.x, room.position.x);
                 Assert.Less(bbox.position.y, room.position.y);
                 Assert.Greater(bbox.size.x, room.size.x);
                 Assert.Greater(bbox.size.y, room.size.y);
                 Assert.Greater(bbox.size.x, room.position.x + room.size.x);
-                Assert.Greater(bbox.size.y, room.position.y + room.size.y);
-            }
-        }
-        
-        public class RoomCreatorExpose : RoomCreator
-        {
-            public RoomCreatorExpose(Random random) : base(random) {}
-            
-            public BoundaryBox CreateRoom(BoundaryBox bbox)
-            {
-                return _CreateRoom(bbox, Random);
-            }
+                Assert.Greater(bbox.size.y, room.position.y + room.size.y); 
+            });
         }
     }
 }

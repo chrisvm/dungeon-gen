@@ -59,7 +59,6 @@ namespace dungeon_gen_gui
 			});
 			
 			var bspNodes = leafParents as BspNode[] ?? leafParents.ToArray();
-			Console.WriteLine($"leafParents.Count = {bspNodes.Length}");
 			
 			// connect the filtered nodes
 			var connections = new List<RoomConnection>();

@@ -64,7 +64,7 @@ namespace dungeon_gen
 		/// </summary>
 		/// <param name="nodeTree"></param>
 		/// <param name="connections"></param>
-		private static void PrintToBitmap(BspNode nodeTree, List<RoomConnection> connections)
+		private static void PrintToBitmap(BspNode nodeTree, IEnumerable<RoomConnection> connections)
 		{
 			// create bitmap objecet to use in rendering
 			var bitmap = new Bitmap((int) nodeTree.bbox.size.x, (int) nodeTree.bbox.size.y); 

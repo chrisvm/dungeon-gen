@@ -59,10 +59,10 @@ namespace dungeon_gen_lib.Room
 			// calculate the start and end of the connetion based on the calc origin
 			if (node.splitDirection == SplitDirection.Vertical) {
 				connection.Start = new Vector2(a.room.position.x + a.room.size.x, corridorOrigin);
-				connection.End = new Vector2(b.room.position.x + b.room.size.x, corridorOrigin);
+				connection.End = new Vector2(b.room.position.x, corridorOrigin);
 			} else {
 				connection.Start = new Vector2(corridorOrigin, a.room.position.y + a.room.size.y);
-				connection.End = new Vector2(corridorOrigin, b.room.position.y + b.room.size.y);
+				connection.End = new Vector2(corridorOrigin, b.room.position.y);
 			}
 			
 			return connection;
